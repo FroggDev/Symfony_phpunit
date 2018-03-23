@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Model;
+
+use LogicException;
 
 class Molecule
 {
@@ -26,8 +29,9 @@ class Molecule
      * @param Atom $atom
      * @return Molecule
      */
-    public function addAtom(Atom $atom) : Molecule
+    public function addAtom(Atom $atom): Molecule
     {
+        $this->name = null;
         $this->atoms[] = $atom;
         return $this;
     }
@@ -35,18 +39,23 @@ class Molecule
     /**
      * @return Molecule
      */
-    public function merge() : Molecule
+    public function merge(): Molecule
     {
-        foreach($this->atoms as $atom){
-            $this->name .= $atom->getName();
+        if (count($this->atoms) < 2) {
+            throw new LogicException("Method merge() require at least 2 atoms");
         }
+
+        foreach ($this->atoms as $atom) {
+            $this->name .= $atom->getSymbol();
+        }
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -54,7 +63,7 @@ class Molecule
     /**
      * @return array
      */
-    public function getAtoms() : array
+    public function getAtoms(): array
     {
         return $this->atoms;
     }

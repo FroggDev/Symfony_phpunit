@@ -18,9 +18,22 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests/</directory>
+
+        <!-- php bin/phpunit testsuite Math -->
+        <testsuite name="Math">
+            <directory>tests/Maths/</directory>
         </testsuite>
+
+        <!-- php bin/phpunit - -testsuite Molecule -->
+        <testsuite name="Molecule">
+            <directory>tests/Model/MoleculeTest.php</directory>
+        </testsuite>
+
+        <!-- php bin/phpunit - -testsuite Atom -->
+        <testsuite name="Atom">
+            <directory>tests/Model/AtomTest.php</directory>
+        </testsuite>
+
     </testsuites>
 
     <filter>
